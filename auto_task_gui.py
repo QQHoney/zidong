@@ -25,6 +25,8 @@ STEP_TYPES = {
     'wait_time': {'icon': '⏱️', 'name': '等待时间', 'params': ['seconds']},
     'open_url': {'icon': '🌐', 'name': '打开URL', 'params': ['url']},
     'open_app': {'icon': '🚀', 'name': '打开程序', 'params': ['app_path']},
+    'close_app': {'icon': '❌', 'name': '关闭程序', 'params': ['process_name']},
+    'close_browser': {'icon': '🔒', 'name': '关闭浏览器', 'params': ['browser_type']},
     'paste': {'icon': '📋', 'name': '粘贴', 'params': []},
     'clipboard_set': {'icon': '📋', 'name': '设置剪贴板', 'params': ['content']},
     'ocr_region': {'icon': '🔤', 'name': 'OCR识别', 'params': ['x1', 'y1', 'x2', 'y2', 'var_name']},
@@ -47,6 +49,8 @@ PARAM_DEFAULTS = {
     'duration': 1.0,
     'app_path': '',
     'loop_count': 3,
+    'process_name': '',
+    'browser_type': 'all',
 }
 
 # 参数中文名称
@@ -79,6 +83,8 @@ PARAM_LABELS = {
     'token': '令牌',
     'duration': '时长(秒)',
     'loop_count': '循环次数',
+    'process_name': '进程名',
+    'browser_type': '浏览器类型',
 }
 
 
@@ -359,6 +365,36 @@ def step_{idx}_loop_end():
     """循环结束"""
     pass  # 循环逻辑在main中处理
 ''',
+        'close_app': '''
+def step_{idx}_close_app():
+    """关闭程序: {process_name}"""
+    import subprocess
+    process_name = "{process_name}"
+    try:
+        subprocess.run(f'taskkill /F /IM {{process_name}}', shell=True, capture_output=True)
+        print(f"  [√] 已关闭: {{process_name}}")
+    except Exception as e:
+        print(f"  [!] 关闭失败: {{e}}")
+''',
+        'close_browser': '''
+def step_{idx}_close_browser():
+    """关闭浏览器: {browser_type}"""
+    import subprocess
+    browser_type = "{browser_type}"
+    browsers = {{
+        'chrome': ['chrome.exe', 'chromedriver.exe'],
+        'edge': ['msedge.exe', 'msedgedriver.exe'],
+        'firefox': ['firefox.exe', 'geckodriver.exe'],
+        'all': ['chrome.exe', 'msedge.exe', 'firefox.exe', 'chromedriver.exe', 'msedgedriver.exe', 'geckodriver.exe']
+    }}
+    targets = browsers.get(browser_type, browsers['all'])
+    for proc in targets:
+        try:
+            subprocess.run(f'taskkill /F /IM {{proc}}', shell=True, capture_output=True)
+        except:
+            pass
+    print(f"  [√] 已关闭浏览器: {{browser_type}}")
+''',
     }
 
     MAIN_TEMPLATE = '''
@@ -486,6 +522,10 @@ class StepListPanel(ctk.CTkScrollableFrame):
                 text += f" {step.params.get('loop_count', 3)}次"
             elif step.step_type == 'mouse_drag':
                 text += f" ({step.params.get('start_x', 0)},{step.params.get('start_y', 0)})->({step.params.get('end_x', 0)},{step.params.get('end_y', 0)})"
+            elif step.step_type == 'close_app':
+                text += f" {step.params.get('process_name', '')}"
+            elif step.step_type == 'close_browser':
+                text += f" {step.params.get('browser_type', 'all')}"
 
             btn = ctk.CTkButton(
                 frame, text=text, anchor="w",
