@@ -429,6 +429,138 @@
         "seconds": 3
       },
       "enabled": true
+    },
+    {
+      "id": "c6c0c37a",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://fuli.hxi.me/wheel"
+      },
+      "enabled": true
+    },
+    {
+      "id": "b54b3d9a",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "805b61e0",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/kaishichoujiang.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "20e26c02",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "720e8df5",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/fuzhi.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "7552f99d",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://runanytime.hxi.me/console/topup"
+      },
+      "enabled": true
+    },
+    {
+      "id": "29c45b9e",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "5f2a7e13",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/shuruduihuanma.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "f139ba37",
+      "step_type": "paste",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "id": "40e1f82e",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "d8a47b91",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/duihuanedu.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "8175a243",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "293ba526",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 751,
+        "y1": 512,
+        "x2": 992,
+        "y2": 590,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "11b4ef20",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "{result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "4ea1f9ba",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
     }
   ]
 }

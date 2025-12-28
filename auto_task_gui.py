@@ -20,6 +20,7 @@ STEP_TYPES = {
     'click_image': {'icon': '📌', 'name': '点击图片', 'params': ['image_path', 'confidence', 'timeout']},
     'wait_image': {'icon': '⏳', 'name': '等待图片', 'params': ['image_path', 'confidence', 'timeout']},
     'long_press': {'icon': '👆', 'name': '长按', 'params': ['duration', 'x', 'y']},
+    'mouse_drag': {'icon': '🖱️', 'name': '鼠标拖动', 'params': ['start_x', 'start_y', 'end_x', 'end_y', 'duration']},
     'input_text': {'icon': '⌨️', 'name': '输入文本', 'params': ['text', 'clear_first']},
     'wait_time': {'icon': '⏱️', 'name': '等待时间', 'params': ['seconds']},
     'open_url': {'icon': '🌐', 'name': '打开URL', 'params': ['url']},
@@ -29,6 +30,8 @@ STEP_TYPES = {
     'ocr_region': {'icon': '🔤', 'name': 'OCR识别', 'params': ['x1', 'y1', 'x2', 'y2', 'var_name']},
     'press_key': {'icon': '⌨️', 'name': '按键操作', 'params': ['key', 'modifiers']},
     'wx_push': {'icon': '📱', 'name': '微信推送', 'params': ['title', 'content', 'token']},
+    'loop_start': {'icon': '🔁', 'name': '循环开始', 'params': ['loop_count']},
+    'loop_end': {'icon': '🔚', 'name': '循环结束', 'params': []},
 }
 
 # 参数默认值
@@ -38,10 +41,12 @@ PARAM_DEFAULTS = {
     'url': 'https://', 'var_name': 'result', 'content': '',
     'x': 0, 'y': 0, 'width': 200, 'height': 100,
     'x1': 0, 'y1': 0, 'x2': 200, 'y2': 100,
+    'start_x': 0, 'start_y': 0, 'end_x': 100, 'end_y': 100,
     'key': 'enter', 'modifiers': '',
     'title': '通知', 'token': '',
     'duration': 1.0,
     'app_path': '',
+    'loop_count': 3,
 }
 
 # 参数中文名称
@@ -64,11 +69,16 @@ PARAM_LABELS = {
     'y1': '起始Y',
     'x2': '结束X',
     'y2': '结束Y',
+    'start_x': '起点X',
+    'start_y': '起点Y',
+    'end_x': '终点X',
+    'end_y': '终点Y',
     'key': '按键',
     'modifiers': '组合键',
     'title': '标题',
     'token': '令牌',
     'duration': '时长(秒)',
+    'loop_count': '循环次数',
 }
 
 
@@ -331,6 +341,24 @@ def step_{idx}_wx_push():
             title = title.replace('{{' + var_name + '}}', str(globals()[var_name]))
     WxPush.send(title, content, config)
 ''',
+        'mouse_drag': '''
+def step_{idx}_mouse_drag():
+    """鼠标拖动: ({start_x},{start_y}) -> ({end_x},{end_y})"""
+    import pyautogui
+    pyautogui.moveTo({start_x}, {start_y})
+    time.sleep(0.1)
+    pyautogui.drag({end_x} - {start_x}, {end_y} - {start_y}, duration={duration})
+''',
+        'loop_start': '''
+def step_{idx}_loop_start():
+    """循环开始: {loop_count} 次"""
+    pass  # 循环逻辑在main中处理
+''',
+        'loop_end': '''
+def step_{idx}_loop_end():
+    """循环结束"""
+    pass  # 循环逻辑在main中处理
+''',
     }
 
     MAIN_TEMPLATE = '''
@@ -352,6 +380,8 @@ if __name__ == "__main__":
     def generate(self, step_manager: StepManager) -> str:
         code = self.IMPORTS
         step_calls = []
+        indent_level = 1  # 基础缩进级别
+        loop_stack = []  # 循环栈，存储循环次数
 
         for idx, step in enumerate(step_manager.steps, 1):
             if not step.enabled:
@@ -378,8 +408,25 @@ if __name__ == "__main__":
                     params['key_code'] = f'pyautogui.press("{key}")'
 
             code += template.format(**params)
-            step_calls.append(f'    print("步骤{idx}: {STEP_TYPES[step.step_type]["name"]}")')
-            step_calls.append(f'    step_{idx}_{step.step_type}()')
+
+            # 处理循环逻辑
+            base_indent = '    ' * indent_level
+            if step.step_type == 'loop_start':
+                loop_count = params.get('loop_count', 3)
+                loop_stack.append(loop_count)
+                step_calls.append(f'{base_indent}print("步骤{idx}: 循环开始 ({loop_count}次)")')
+                step_calls.append(f'{base_indent}for _loop_i_{len(loop_stack)} in range({loop_count}):')
+                step_calls.append(f'{base_indent}    print(f"  第 {{_loop_i_{len(loop_stack)} + 1}}/{loop_count} 次循环")')
+                indent_level += 1
+            elif step.step_type == 'loop_end':
+                if loop_stack:
+                    loop_stack.pop()
+                    indent_level = max(1, indent_level - 1)
+                    base_indent = '    ' * indent_level
+                step_calls.append(f'{base_indent}print("步骤{idx}: 循环结束")')
+            else:
+                step_calls.append(f'{base_indent}print("步骤{idx}: {STEP_TYPES[step.step_type]["name"]}")')
+                step_calls.append(f'{base_indent}step_{idx}_{step.step_type}()')
 
         code += self.MAIN_TEMPLATE.format(step_calls='\n'.join(step_calls))
         return code
@@ -435,6 +482,10 @@ class StepListPanel(ctk.CTkScrollableFrame):
                     text += f" {key_param[:20]}..."
             elif step.step_type == 'wait_time':
                 text += f" {step.params.get('seconds', 0)}秒"
+            elif step.step_type == 'loop_start':
+                text += f" {step.params.get('loop_count', 3)}次"
+            elif step.step_type == 'mouse_drag':
+                text += f" ({step.params.get('start_x', 0)},{step.params.get('start_y', 0)})->({step.params.get('end_x', 0)},{step.params.get('end_y', 0)})"
 
             btn = ctk.CTkButton(
                 frame, text=text, anchor="w",

@@ -8,7 +8,13 @@
       "Bash(pip install easyocr --user -i https://pypi.tuna.tsinghua.edu.cn/simple)",
       "Bash(git init)",
       "Bash(git remote add origin https://github.com/QQHoney/zidong.git)",
-      "Bash(git add -A)"
+      "Bash(git add -A)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n初始提交：自动化任务生成器\n\n- 可视化 GUI 配置自动化任务流程\n- 支持图片识别、OCR、键盘鼠标操作等\n- 定时任务管理功能\n- 完整使用说明文档\nEOF\n\\)\")",
+      "Bash(git branch -M main)",
+      "Bash(git push -u origin main)",
+      "Bash(git add README.md)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n更新 README.md 为完整使用说明文档\nEOF\n\\)\")",
+      "Bash(git push)"
     ]
   }
 }
