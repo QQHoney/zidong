@@ -1,0 +1,62 @@
+{
+  "name": "示例签到任务",
+  "description": "演示自动化签到流程",
+  "settings": {
+    "default_confidence": 0.8,
+    "default_timeout": 30
+  },
+  "steps": [
+    {
+      "id": "step_001",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://example.com"
+      },
+      "enabled": true
+    },
+    {
+      "id": "step_002",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "step_003",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "images/signin_entry.png",
+        "confidence": 0.8,
+        "timeout": 30
+      },
+      "enabled": true
+    },
+    {
+      "id": "step_004",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 5
+      },
+      "enabled": true
+    },
+    {
+      "id": "step_005",
+      "step_type": "clipboard_get",
+      "params": {
+        "var_name": "redeem_code"
+      },
+      "enabled": true
+    },
+    {
+      "id": "step_006",
+      "step_type": "wx_push",
+      "params": {
+        "title": "签到完成",
+        "content": "兑换码已获取",
+        "token": "your_token"
+      },
+      "enabled": true
+    }
+  ]
+}

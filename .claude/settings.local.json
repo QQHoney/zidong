@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install pyautogui pillow opencv-python)",
+      "Bash(python -c \"\nimport pyautogui\nimport cv2\nimport numpy as np\nfrom PIL import ImageGrab\n\nprint\\(''所有依赖导入成功!''\\)\nprint\\(f''pyautogui 版本: {pyautogui.__version__}''\\)\nprint\\(f''OpenCV 版本: {cv2.__version__}''\\)\nprint\\(f''NumPy 版本: {np.__version__}''\\)\n\n# 测试截图功能\nscreenshot = ImageGrab.grab\\(\\)\nprint\\(f''屏幕分辨率: {screenshot.size}''\\)\n\n# 测试鼠标位置\nx, y = pyautogui.position\\(\\)\nprint\\(f''当前鼠标位置: \\({x}, {y}\\)''\\)\n\nprint\\(''\\\\n基础功能测试通过!''\\)\n\")",
+      "Bash(pip install pyperclip)",
+      "Bash(pip install paddleocr paddlepaddle -i https://pypi.tuna.tsinghua.edu.cn/simple)",
+      "Bash(pip install easyocr --user -i https://pypi.tuna.tsinghua.edu.cn/simple)",
+      "Bash(git init)",
+      "Bash(git remote add origin https://github.com/QQHoney/zidong.git)",
+      "Bash(git add -A)"
+    ]
+  }
+}

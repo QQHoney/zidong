@@ -1,0 +1,434 @@
+{
+  "name": "未命名任务",
+  "description": "",
+  "settings": {
+    "default_confidence": 0.8,
+    "default_timeout": 30
+  },
+  "steps": [
+    {
+      "id": "198c4dde",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://fuli.hxi.me/"
+      },
+      "enabled": true
+    },
+    {
+      "id": "59bee9fb",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c1cc27c5",
+      "step_type": "wait_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/changanqiandao.png",
+        "confidence": 0.8,
+        "timeout": 30
+      },
+      "enabled": true
+    },
+    {
+      "id": "142440cd",
+      "step_type": "long_press",
+      "params": {
+        "duration": 5.0,
+        "x": 950,
+        "y": 771
+      },
+      "enabled": true
+    },
+    {
+      "id": "3c075fff",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "16d95701",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/fuzhi.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "ebe50b02",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "7b7303c2",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://runanytime.hxi.me/console/topup"
+      },
+      "enabled": true
+    },
+    {
+      "id": "23407db2",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "4f5034e5",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/shuruduihuanma.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "4383e6b6",
+      "step_type": "paste",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "id": "1749fc51",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "3175d33b",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/duihuanedu.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "8ab65896",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "32ce1c1a",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 751,
+        "y1": 512,
+        "x2": 992,
+        "y2": 590,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "61bc3d7b",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "{result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "b7194560",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "bc06a4c0",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/queding.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "eec08e5e",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://fuli.hxi.me/wheel"
+      },
+      "enabled": true
+    },
+    {
+      "id": "d25130a3",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "bbd63a3d",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/kaishichoujiang.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "02aaec37",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "92e9b4f6",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/fuzhi.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "5f18e7c7",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://runanytime.hxi.me/console/topup"
+      },
+      "enabled": true
+    },
+    {
+      "id": "77c71ac9",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "431217b0",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/shuruduihuanma.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "084d6b7a",
+      "step_type": "paste",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "id": "57001866",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "914726db",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/duihuanedu.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "eeb60e48",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "cf63e661",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 751,
+        "y1": 512,
+        "x2": 992,
+        "y2": 590,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "d363c18b",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "{result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "d289b582",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "214eaafd",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://fuli.hxi.me/wheel"
+      },
+      "enabled": true
+    },
+    {
+      "id": "3aefae68",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c1243f0f",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/kaishichoujiang.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "6ae39307",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "3264beae",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/fuzhi.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "2c6cc283",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://runanytime.hxi.me/console/topup"
+      },
+      "enabled": true
+    },
+    {
+      "id": "94a5a8ce",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "6d8cb2dc",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/shuruduihuanma.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "07a5e827",
+      "step_type": "paste",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "id": "3708bca5",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "d2b61011",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/随时跑路/duihuanedu.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "a660e091",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "bbf703c9",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 751,
+        "y1": 512,
+        "x2": 992,
+        "y2": 590,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "35383620",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "{result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "59cc79de",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    }
+  ]
+}

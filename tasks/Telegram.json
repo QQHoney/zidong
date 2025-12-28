@@ -1,0 +1,426 @@
+{
+  "name": "未命名任务",
+  "description": "",
+  "settings": {
+    "default_confidence": 0.8,
+    "default_timeout": 30
+  },
+  "steps": [
+    {
+      "id": "58ea106b",
+      "step_type": "open_app",
+      "params": {
+        "app_path": "F:/Telegram Desktop/Telegram.exe"
+      },
+      "enabled": true
+    },
+    {
+      "id": "a9005c6f",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "b822c0b5",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/sousuo.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "f9638573",
+      "step_type": "input_text",
+      "params": {
+        "text": "@xdhz88bot",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "960388f1",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "db37652b",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "daf8bef6",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/shuru.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "a093b8ee",
+      "step_type": "input_text",
+      "params": {
+        "text": "/签到",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "ec6bb645",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "1a758c83",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "d56f8f41",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 512,
+        "y1": 826,
+        "x2": 739,
+        "y2": 975,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "a9c2ed4f",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "收到消息: {result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "32799f68",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c58ebedf",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/sousuo.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "1d2fa13d",
+      "step_type": "input_text",
+      "params": {
+        "text": "@jdHappybot",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "5e104df0",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "36865455",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "93dabec7",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/shuru.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "a28aa9a4",
+      "step_type": "input_text",
+      "params": {
+        "text": "/签到",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "19bc91b6",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "655da6f6",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "b078164c",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "97ee2f3e",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 512,
+        "y1": 727,
+        "x2": 651,
+        "y2": 792,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "40363ba9",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "收到消息: {result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "572ff53e",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/sousuo.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "b44ce818",
+      "step_type": "input_text",
+      "params": {
+        "text": "@Carll_Bomb_bot",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "8a2f5858",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "a9c83749",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "a2bc3aeb",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/shuru.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "e65e400f",
+      "step_type": "input_text",
+      "params": {
+        "text": "签到",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "0969b873",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "f2cf89f1",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "12f435a1",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 512,
+        "y1": 826,
+        "x2": 739,
+        "y2": 975,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "0f13cbba",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "收到消息: {result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    },
+    {
+      "id": "f9834a4f",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "8cc4f4ed",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/sousuo.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "64bed689",
+      "step_type": "input_text",
+      "params": {
+        "text": "@aisgk11111bot",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "b3372c66",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "f4bdd639",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c3c15c64",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/shuru.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "130e3776",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "e2d7a060",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/qiandao.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c140055c",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 5
+      },
+      "enabled": true
+    },
+    {
+      "id": "328edff9",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 514,
+        "y1": 382,
+        "x2": 673,
+        "y2": 434,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "3b9d5b83",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "收到消息: {result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    }
+  ]
+}
