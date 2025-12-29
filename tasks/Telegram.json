@@ -421,6 +421,116 @@
         "token": "bing521"
       },
       "enabled": true
+    },
+    {
+      "id": "ca7a5919",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c6766144",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/sousuo.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "d055c2f1",
+      "step_type": "input_text",
+      "params": {
+        "text": "@lmdxhzj_bot",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "e2236a37",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "d282be89",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "699d3228",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/telegram/shuru.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "7120a278",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "25ae320c",
+      "step_type": "input_text",
+      "params": {
+        "text": "/qd",
+        "clear_first": true
+      },
+      "enabled": true
+    },
+    {
+      "id": "8713e26a",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "52dd1f18",
+      "step_type": "press_key",
+      "params": {
+        "key": "enter",
+        "modifiers": ""
+      },
+      "enabled": true
+    },
+    {
+      "id": "5181301e",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 512,
+        "y1": 826,
+        "x2": 739,
+        "y2": 975,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "cb218408",
+      "step_type": "wx_push",
+      "params": {
+        "title": "通知",
+        "content": "收到消息: {result}",
+        "token": "bing521"
+      },
+      "enabled": true
     }
   ]
 }

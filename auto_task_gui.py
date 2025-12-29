@@ -121,9 +121,19 @@ class StepManager:
         if self._on_change:
             self._on_change()
 
-    def add_step(self, step_type: str) -> Step:
+    def add_step(self, step_type: str, insert_after_id: str = None) -> Step:
         params = {p: PARAM_DEFAULTS.get(p, '') for p in STEP_TYPES[step_type]['params']}
         step = Step(step_type=step_type, params=params)
+
+        # 如果指定了插入位置，则插入到该位置之后
+        if insert_after_id:
+            for i, s in enumerate(self.steps):
+                if s.id == insert_after_id:
+                    self.steps.insert(i + 1, step)
+                    self._notify()
+                    return step
+
+        # 默认添加到末尾
         self.steps.append(step)
         self._notify()
         return step
@@ -139,6 +149,18 @@ class StepManager:
                 if 0 <= new_idx < len(self.steps):
                     self.steps[i], self.steps[new_idx] = self.steps[new_idx], self.steps[i]
                     self._notify()
+                break
+
+    def move_step_to(self, step_id: str, target_idx: int):
+        """移动步骤到指定位置（从1开始）"""
+        target_idx = target_idx - 1  # 转换为0索引
+        for i, s in enumerate(self.steps):
+            if s.id == step_id:
+                if i == target_idx or target_idx < 0 or target_idx >= len(self.steps):
+                    return
+                step = self.steps.pop(i)
+                self.steps.insert(target_idx, step)
+                self._notify()
                 break
 
     def update_step(self, step_id: str, params: Dict):
@@ -445,6 +467,12 @@ if __name__ == "__main__":
             params = step.params.copy()
             params['idx'] = idx
 
+            # 补充缺失的默认参数（兼容旧配置文件）
+            step_info = STEP_TYPES.get(step.step_type, {})
+            for param_name in step_info.get('params', []):
+                if param_name not in params:
+                    params[param_name] = PARAM_DEFAULTS.get(param_name, '')
+
             # 特殊处理
             if step.step_type == 'input_text':
                 params['clear_code'] = 'pyautogui.hotkey("ctrl", "a")\n    ' if params.get('clear_first') else ''
@@ -581,6 +609,7 @@ class PropertyEditor(ctk.CTkFrame):
 
         ctk.CTkButton(btn_frame, text="↑", width=40, command=lambda: self._move(-1)).pack(side="left", padx=2)
         ctk.CTkButton(btn_frame, text="↓", width=40, command=lambda: self._move(1)).pack(side="left", padx=2)
+        ctk.CTkButton(btn_frame, text="移动到", width=60, command=self._move_to).pack(side="left", padx=2)
         ctk.CTkButton(btn_frame, text="复制", width=50, command=self._copy).pack(side="left", padx=2)
         ctk.CTkButton(btn_frame, text="启用/禁用", width=80, command=self._toggle).pack(side="left", padx=2)
         ctk.CTkButton(btn_frame, text="删除", width=60, fg_color="red", command=self._delete).pack(side="right", padx=2)
@@ -759,6 +788,28 @@ class PropertyEditor(ctk.CTkFrame):
         if self.current_step:
             self.step_manager.move_step(self.current_step.id, direction)
 
+    def _move_to(self):
+        """移动到指定位置"""
+        if not self.current_step:
+            return
+        from tkinter import simpledialog
+        total = len(self.step_manager.steps)
+        # 获取当前位置
+        current_idx = 0
+        for i, s in enumerate(self.step_manager.steps):
+            if s.id == self.current_step.id:
+                current_idx = i + 1
+                break
+        target = simpledialog.askinteger(
+            "移动到",
+            f"当前位置: {current_idx}\n输入目标位置 (1-{total}):",
+            parent=self,
+            minvalue=1,
+            maxvalue=total
+        )
+        if target:
+            self.step_manager.move_step_to(self.current_step.id, target)
+
     def _toggle(self):
         if self.current_step:
             self.step_manager.toggle_step(self.current_step.id)
@@ -870,7 +921,9 @@ class AutoTaskGUI(ctk.CTk):
         self._update_preview()
 
     def _add_step(self, step_type: str):
-        self.config.step_manager.add_step(step_type)
+        # 如果有选中的步骤，插入到其下方；否则添加到末尾
+        insert_after_id = self.step_list.selected_id
+        self.config.step_manager.add_step(step_type, insert_after_id)
         self._update_preview()
 
     def _on_step_select(self, step: Step):
