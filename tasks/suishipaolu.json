@@ -561,6 +561,14 @@
         "seconds": 3
       },
       "enabled": true
+    },
+    {
+      "id": "72888b98",
+      "step_type": "close_browser",
+      "params": {
+        "browser_type": "all"
+      },
+      "enabled": true
     }
   ]
 }

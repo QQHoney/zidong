@@ -1,0 +1,168 @@
+{
+  "name": "未命名任务",
+  "description": "",
+  "settings": {
+    "default_confidence": 0.8,
+    "default_timeout": 30
+  },
+  "steps": [
+    {
+      "id": "19e3ee0a",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://x666.me/"
+      },
+      "enabled": true
+    },
+    {
+      "id": "df925ac0",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 10
+      },
+      "enabled": true
+    },
+    {
+      "id": "6f52837e",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/薄荷/guanbigonggao.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "59175ffa",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "ea5c199e",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/薄荷/qwqd.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "93f7c44e",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 8
+      },
+      "enabled": true
+    },
+    {
+      "id": "8a61f10d",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/薄荷/kszd.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "bae53460",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 10
+      },
+      "enabled": true
+    },
+    {
+      "id": "8bf95334",
+      "step_type": "open_url",
+      "params": {
+        "url": "https://x666.me/console/topup"
+      },
+      "enabled": true
+    },
+    {
+      "id": "61f206e1",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 5
+      },
+      "enabled": true
+    },
+    {
+      "id": "4f0d0ee3",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/薄荷/qsrdhm.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "f2d7449a",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "2b2cc61a",
+      "step_type": "paste",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "id": "2c2f3ce2",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "117b0ba2",
+      "step_type": "click_image",
+      "params": {
+        "image_path": "C:/Users/Administrator/Desktop/新建文件夹/images/薄荷/eddh.png",
+        "confidence": 0.8,
+        "timeout": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "100359bc",
+      "step_type": "ocr_region",
+      "params": {
+        "x1": 746,
+        "y1": 502,
+        "x2": 1168,
+        "y2": 614,
+        "var_name": "result"
+      },
+      "enabled": true
+    },
+    {
+      "id": "43263b03",
+      "step_type": "wait_time",
+      "params": {
+        "seconds": 3
+      },
+      "enabled": true
+    },
+    {
+      "id": "c94082c3",
+      "step_type": "wx_push",
+      "params": {
+        "title": "薄荷签到",
+        "content": "{result}",
+        "token": "bing521"
+      },
+      "enabled": true
+    }
+  ]
+}

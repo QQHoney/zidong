@@ -29,7 +29,7 @@ STEP_TYPES = {
     'close_browser': {'icon': '🔒', 'name': '关闭浏览器', 'params': ['browser_type']},
     'paste': {'icon': '📋', 'name': '粘贴', 'params': []},
     'clipboard_set': {'icon': '📋', 'name': '设置剪贴板', 'params': ['content']},
-    'ocr_region': {'icon': '🔤', 'name': 'OCR识别', 'params': ['x1', 'y1', 'x2', 'y2', 'var_name']},
+    'ocr_region': {'icon': '🔤', 'name': 'OCR识别', 'params': ['x1', 'y1', 'x2', 'y2', 'var_name', 'retry_count', 'retry_interval']},
     'press_key': {'icon': '⌨️', 'name': '按键操作', 'params': ['key', 'modifiers']},
     'wx_push': {'icon': '📱', 'name': '微信推送', 'params': ['title', 'content', 'token']},
     'loop_start': {'icon': '🔁', 'name': '循环开始', 'params': ['loop_count']},
@@ -51,6 +51,8 @@ PARAM_DEFAULTS = {
     'loop_count': 3,
     'process_name': '',
     'browser_type': 'all',
+    'retry_count': 10,
+    'retry_interval': 2,
 }
 
 # 参数中文名称
@@ -85,6 +87,8 @@ PARAM_LABELS = {
     'loop_count': '循环次数',
     'process_name': '进程名',
     'browser_type': '浏览器类型',
+    'retry_count': '重试次数',
+    'retry_interval': '重试间隔(秒)',
 }
 
 
@@ -289,43 +293,57 @@ def step_{idx}_clipboard_set():
 ''',
         'ocr_region': '''
 def step_{idx}_ocr_region():
-    """OCR识别区域 ({x1},{y1}) - ({x2},{y2}) - 使用Umi-OCR"""
+    """OCR识别区域 ({x1},{y1}) - ({x2},{y2}) - 使用Umi-OCR (重试{retry_count}次)"""
     global {var_name}
     import os
     import base64
     import io
     import requests
-    
-    screenshot = ImageGrab.grab(bbox=({x1}, {y1}, {x2}, {y2}))
-    # 保存截图用于调试
-    debug_path = "images/_ocr_debug_{idx}.png"
-    os.makedirs("images", exist_ok=True)
-    screenshot.save(debug_path)
-    print(f"  [OCR] 截图区域: ({x1},{y1}) - ({x2},{y2})")
-    
-    # 转换为base64
-    buffer = io.BytesIO()
-    screenshot.save(buffer, format='PNG')
-    img_base64 = base64.b64encode(buffer.getvalue()).decode()
-    
-    # 调用Umi-OCR HTTP API
-    try:
-        resp = requests.post(
-            "http://127.0.0.1:1224/api/ocr",
-            json={{"base64": img_base64, "options": {{"data.format": "text"}}}},
-            timeout=30
-        )
-        data = resp.json()
-        if data.get("code") == 100:
-            {var_name} = data.get("data", "")
-            print(f"  [OCR] 识别结果: {{{var_name}}}")
-        else:
-            {var_name} = ""
-            print(f"  [OCR] 识别失败: {{data.get('msg', '未知错误')}}")
-    except Exception as e:
-        {var_name} = ""
-        print(f"  [OCR] 请求失败: {{e}}")
-        print("  [OCR] 请确保Umi-OCR已启动并开启HTTP服务(端口1224)")
+
+    retry_count = {retry_count}
+    retry_interval = {retry_interval}
+
+    for attempt in range(retry_count):
+        screenshot = ImageGrab.grab(bbox=({x1}, {y1}, {x2}, {y2}))
+        # 保存截图用于调试
+        debug_path = "images/_ocr_debug_{idx}.png"
+        os.makedirs("images", exist_ok=True)
+        screenshot.save(debug_path)
+        print(f"  [OCR] 第 {{attempt + 1}}/{{retry_count}} 次尝试, 截图区域: ({x1},{y1}) - ({x2},{y2})")
+
+        # 转换为base64
+        buffer = io.BytesIO()
+        screenshot.save(buffer, format='PNG')
+        img_base64 = base64.b64encode(buffer.getvalue()).decode()
+
+        # 调用Umi-OCR HTTP API
+        try:
+            resp = requests.post(
+                "http://127.0.0.1:1224/api/ocr",
+                json={{"base64": img_base64, "options": {{"data.format": "text"}}}},
+                timeout=30
+            )
+            data = resp.json()
+            if data.get("code") == 100:
+                result_text = data.get("data", "").strip()
+                if result_text:  # 识别成功且有内容
+                    {var_name} = result_text
+                    print(f"  [OCR] 识别成功: {{{var_name}}}")
+                    return {var_name}
+                else:
+                    print(f"  [OCR] 识别结果为空，等待 {{retry_interval}} 秒后重试...")
+            else:
+                print(f"  [OCR] 识别失败: {{data.get('msg', '未知错误')}}，等待 {{retry_interval}} 秒后重试...")
+        except Exception as e:
+            print(f"  [OCR] 请求失败: {{e}}")
+            print("  [OCR] 请确保Umi-OCR已启动并开启HTTP服务(端口1224)")
+
+        if attempt < retry_count - 1:
+            time.sleep(retry_interval)
+
+    # 所有重试都失败
+    {var_name} = ""
+    print(f"  [OCR] 重试 {{retry_count}} 次后仍然失败!")
     return {var_name}
 ''',
         'press_key': '''
